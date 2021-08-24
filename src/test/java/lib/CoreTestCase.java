@@ -1,31 +1,33 @@
 package lib;
 
 import io.appium.java_client.AppiumDriver;
-import junit.framework.TestCase;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class CoreTestCase extends TestCase {
+public class CoreTestCase {
 
     protected RemoteWebDriver driver;
     protected Platform platform;
 
-    @Override
+    @Before
+    @Step("Create driver")
     public void setUp() throws Exception {
-        super.setUp();
-
-        platform = Platform.getInstance();
-        driver = platform.getDriver();
+        driver = Platform.getInstance().getDriver();
         rotateScreenPortrait();
         openWikiWebPageForMobileWeb();
     }
 
-    @Override
-    public void tearDown() throws Exception {
+    @After
+    @Step("Close driver and session")
+    public void tearDown() {
         driver.quit();
-        super.tearDown();
     }
 
+    @Step("Rotate screen to Portrait mode")
     protected void rotateScreenPortrait() {
         if (driver instanceof AppiumDriver) {
             AppiumDriver driver = (AppiumDriver) this.driver;
@@ -35,6 +37,7 @@ public class CoreTestCase extends TestCase {
         }
     }
 
+    @Step("Open Wikipedia page on mobile Web")
     protected void openWikiWebPageForMobileWeb() {
         if (platform.isMW()) {
             driver.get("https://en.m.wikipedia.org");

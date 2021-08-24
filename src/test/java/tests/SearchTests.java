@@ -2,6 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
@@ -22,7 +23,7 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.initSearchInput();
         searchPageObject.inputInSearchLine("Java");
         searchPageObject.clearSearchLine();
-        assertTrue(searchPageObject.searchLineIsDisplayed());
+        Assert.assertTrue(searchPageObject.searchLineIsDisplayed());
     }
 
     @Test
@@ -39,7 +40,7 @@ public class SearchTests extends CoreTestCase {
                 containsSomeText = true;
             }
         }
-        assertTrue(containsSomeText);
+        Assert.assertTrue(containsSomeText);
     }
 
     @Test
@@ -55,6 +56,6 @@ public class SearchTests extends CoreTestCase {
         int expectedSize = 2;
         boolean comparison = actualSize>expectedSize;
         searchPageObject.waitForElementByTitleAndDescription(title, description);
-        assertTrue(comparison);
+        Assert.assertTrue(comparison);
     }
 }

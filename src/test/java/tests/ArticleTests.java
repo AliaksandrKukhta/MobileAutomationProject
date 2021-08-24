@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.mobile_web.MWArticlePageObject;
@@ -12,6 +14,8 @@ public class ArticleTests extends CoreTestCase {
         LOGIN="AliaksandrKukhta",
         PASSWORD="vfhrtnbyu2021";
     @Test
+    @DisplayName("Delete one article from watchlist")
+    @Description("Search 2 articles and add in Watchlist")
     public void testOfSaveTwoArticles() throws InterruptedException {
         SearchPageObject searchPageObject = new SearchPageObject(driver);
         ArticlePageObject articlePageObject = new ArticlePageObject(driver);
@@ -44,7 +48,7 @@ public class ArticleTests extends CoreTestCase {
             navigationUI.clickMyListButton();
             navigationUI.openList();
             navigationUI.lestSwipe();
-            assertTrue(searchPageObject.waitForSearchResultByTitleIsDisplayed(secondSubject));
+            Assert.assertTrue(searchPageObject.waitForSearchResultByTitleIsDisplayed(secondSubject));
         } else if (Platform.getInstance().isMW()){
             int allArticals=0;
             int articalsAfterDelete=0;
